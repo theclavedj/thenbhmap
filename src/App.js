@@ -53,9 +53,15 @@ state = {
       center: { lat: 44.439663, lng: 26.096306 },
       zoom: 14
     });
-  };
 
 //marker function should load at the same time with google maps function, they should display simultaneosly
+
+var marker = new window.google.maps.Marker({
+  position: {lat: 44.432589, lng: 26.029261},
+  map: map,
+  title: "lets try a marker"
+})
+}
 
   render() {
     return (

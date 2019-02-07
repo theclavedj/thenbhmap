@@ -20,7 +20,7 @@ class App extends Component {
   loadMap = () => {
     window.initMap = this.initMap;
     loadMapsAPI(
-      "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyCaOk9oP1NSXBtSPcrgHAO2fL3gu_UQzWs&v=3&callback=initMap"
+      "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyD8jbgZnV1lh455L-twNQh45MFwRVIKleU&v=3&callback=initMap"
     );
     //console.log(window.initMap)
   };
@@ -34,8 +34,9 @@ class App extends Component {
     const params = {
       client_id: "RI1LDPFFA2C2K0C0DP0TBBY2JTWA30F2O0DNMJTZRQGVXL3P",
       client_secret: "P2RAP3W3EO4MGJDOVUQEA0FG1YEWMG23LMR00A3WHZ55GNQL",
-      query: "drinks",
+      query: "coffee",
       near: "Bucarest",
+      radius: "2500",
       v: "20190602"
     };
     //async request
@@ -79,6 +80,7 @@ class App extends Component {
       const marker = new window.google.maps.Marker({
         title: aVenue.venue.name,
         map: map,
+        animation: window.google.maps.Animation.DROP,
         position: {
           lat: aVenue.venue.location.lat,
           lng: aVenue.venue.location.lng,

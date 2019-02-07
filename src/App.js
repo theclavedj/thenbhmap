@@ -59,40 +59,40 @@ class App extends Component {
   }
   //third required part to load the map, map variable plus js function to load the map
   //https://developers.google.com/maps/documentation/javascript/tutorial
-initMap = () => {
-  const map = new window.google.maps.Map(document.getElementById("map"), {
-    center: { lat: 44.426767, lng: 26.102538 },
-    zoom: 13
-  });
-  //https://developers.google.com/maps/documentation/javascript/infowindows
-  //removed infowindow from array function to avoid multiple open infowindows
-  const infowindow = new window.google.maps.InfoWindow()
+  initMap = () => {
+    const map = new window.google.maps.Map(document.getElementById("map"), {
+      center: { lat: 44.426767, lng: 26.102538 },
+      zoom: 13
+    });
+    //https://developers.google.com/maps/documentation/javascript/infowindows
+    //removed infowindow from array function to avoid multiple open infowindows
+    const infowindow = new window.google.maps.InfoWindow();
 
     //marker function should load at the same time with google maps function, they should display simultaneosly
     //project code 3 windowsshoppingpart1, quote: uses the location array to create an array of markers on initialize, for react should be used .map using value's state
     //using map to loop over venues state, inital state empty but will retrieve the 30 venues we got
-  this.state.venues.map(aVenue => {
-//declaration which will load the infowindow in the page
-    const contentString = `${aVenue.venue.name}`
+    this.state.venues.map(aVenue => {
+      //declaration which will load the infowindow in the page
+      const contentString = `${aVenue.venue.name}`;
 
-  //declaration which loads the markers in the page
-    const marker = new window.google.maps.Marker({
-      title: aVenue.venue.name,
-      map: map,
-      position: {
-        lat: aVenue.venue.location.lat,
-        lng: aVenue.venue.location.lng,
-        key: aVenue.venue.id
-      },
-    });
-//declaration which will listen for clicks in the markers and displays a small info window
-    marker.addListener('click', function() {
-      //display content on InfoWindow
-      infowindow.setContent(contentString)
+      //declaration which loads the markers in the page
+      const marker = new window.google.maps.Marker({
+        title: aVenue.venue.name,
+        map: map,
+        position: {
+          lat: aVenue.venue.location.lat,
+          lng: aVenue.venue.location.lng,
+          key: aVenue.venue.id
+        }
+      });
+      //declaration which will listen for clicks in the markers and displays a small info window
+      marker.addListener("click", function() {
+        //display content on InfoWindow
+        infowindow.setContent(contentString);
         infowindow.open(map, marker);
       });
     });
-  }
+  };
 
   render() {
     //if (!this.state.venues.length) return <p> se jodioooo </p>

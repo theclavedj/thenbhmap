@@ -1,35 +1,4 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+@import url('https://fonts.googleapis.com/css?family=Baloo+Thambi|Montserrat');
 
 #map {
   height: 100vh;
@@ -39,4 +8,62 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+#hide-listings,
+#show-listings {
+  width: 40%;
+  align-items: center;
+  -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background-color:#ededed;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#777777;
+	font-family:Montserrat;
+	font-size:13px;
+	font-weight:bold;
+	padding:5px 20px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#hide-listings:hover,
+#show-listings:hover {
+	background-color:#dfdfdf;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+#hide-listings:active,
+#show-listings:active {
+  position:relative;
+	top:1px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#map {
+  bottom:0px;
+  height: 100vh;
+  left: 362px;
+  position: absolute;
+  right: 0px;
+}
+
+.options-box {
+  background: #040620;
+  border: 1px solid #999;
+  border-radius: 3px;
+  height: 100vh;
+  line-height: 35px;
+  padding: 10px 10px 30px 10px;
+  text-align: center;
+  width: 340px;
 }

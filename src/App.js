@@ -183,7 +183,12 @@ class App extends Component {
     return (
       <main>
         {/*second request to add the map, a div with the id of map*/}
-        <div id="map" />
+          <div className="options-box">
+            <input id="show-listings" type="button" value="Show Listings"></input>
+            <input id="hide-listings" type="button" value="Hide Listings"></input>
+          <div id="map">
+          </div>
+        </div>
       </main>
     );
   }

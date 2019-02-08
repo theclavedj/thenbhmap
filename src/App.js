@@ -155,7 +155,8 @@ class App extends Component {
     //using map to loop over venues state, inital state empty but will retrieve the 30 venues we got
     this.state.venues.map(aVenue => {
       //declaration which will load the infowindow in the page
-      const contentString = `${aVenue.venue.name}`;
+      const contentString = `${aVenue.venue.name},
+      ${aVenue.venue.location.address}`;
 
       //declaration which loads the markers in the page
       const marker = new window.google.maps.Marker({

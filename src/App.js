@@ -38,9 +38,8 @@ class App extends Component {
       client_secret: "P2RAP3W3EO4MGJDOVUQEA0FG1YEWMG23LMR00A3WHZ55GNQL",
       query: "coffee",
       near: "Bucarest",
-      radius: "25000",
-      price: "1,2",
-      v: "20190602"
+      radius: "50000",
+      v: "20190902"
     };
     //async request
     fetch(venuesAPI + new URLSearchParams(params), {

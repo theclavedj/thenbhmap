@@ -10,6 +10,7 @@ class App extends Component {
       query: '',
       venues: [] //empty array which will be filled once the function getinfo loads the information from foursquare api async request
     };
+    this.markers = [];
   }
 
   componentDidMount() {
@@ -364,7 +365,7 @@ class App extends Component {
       //need to make on photoshop the marker
       //const image = "http://i65.tinypic.com/2ufdseu.gif"
       //declaration which loads the markers in the page
-      const marker = new window.google.maps.Marker({
+      let marker = new window.google.maps.Marker({
         title: aVenue.venue.name,
         map: map,
         //icon: image,
@@ -375,6 +376,9 @@ class App extends Component {
           key: aVenue.venue.id
         }
       });
+      //add new markers to markers array, so we can use it to filter through search each marker
+      this.markers.push(marker)
+      //console.log(marker)
       //declaration which will listen for clicks in the markers and displays a small info window
       marker.addListener("click", function() {
         //display content on InfoWindow
@@ -388,7 +392,14 @@ class App extends Component {
   };
 
 filterVenues(query) {
-  console.log(query)
+  this.markers.filter(marker => {
+    //console.log(marker)
+    //filter the markers by name and set visibility to true if it matches the query
+    marker.title.toLowerCase().includes(query.toLowerCase()) === true ?
+    marker.setVisible(true) :
+    marker.setVisible(false);
+  })
+  this.setState({ query });
 }
 
   render() {
@@ -406,7 +417,7 @@ filterVenues(query) {
             placeholder="Ex: Coffee on Universitate"
             /*below the value will be the state of what the user wrote*/
             value={this.state.query}
-            /*on change the event listener invokes updateQuery, then calls setState*/
+            /*on change the event listener invokes filterVenues, then calls setState*/
             onChange={event => this.filterVenues(event.target.value)}
           />
           <input id="go-places" type="button" value="Go" />

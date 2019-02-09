@@ -3,6 +3,7 @@ import "./App.css";
 import "whatwg-fetch";
 
 class App extends Component {
+  //proper usage of constructor and super https://reactjs.org/docs/react-component.html
   constructor() {
     super();
     //state of component which will receive info from foursquare api
@@ -10,15 +11,15 @@ class App extends Component {
       query: '', //empty string which will receive input from user and will show markers according to the search
       venues: [] //empty array which will be filled once the function getinfo loads the information from foursquare api async request
     };
-    this.markers = [];
+    this.markers = []; //empty array of markers which will be filled later on
   }
 
   componentDidMount() {
-    //when the componentDidMount starts the loadmap function should be loaded and should call getinfo function to load foursquare api
+    //when the componentDidMount starts the loadmap function should be loaded to get google maps and also should call getinfo function to load foursquare api
     this.getInfo();
     //console.log(this.getInfo);
   }
-//
+
   loadMap = () => {
     window.initMap = this.initMap;
     loadMapsAPI(
@@ -30,18 +31,20 @@ class App extends Component {
   //create venue app using react with foursquare api http://stevebrown.co/journal/creating-a-local-venue-app-using-reactredux-with-the-foursquare-api-part-i
   // react docs, ajax and apis https://reactjs.org/docs/faq-ajax.html
   getInfo() {
+    //this is necesary as we are working with constructor and super definitions
     let setVenueState = this.setState.bind(this);
-
+    //variable which saves default foursquare url
     const venuesAPI = "https://api.foursquare.com/v2/venues/explore?";
+    //variable wich saves details of foursquare such as id and type of information we are requesting
     const params = {
-      client_id: "RI1LDPFFA2C2K0C0DP0TBBY2JTWA30F2O0DNMJTZRQGVXL3P",
-      client_secret: "P2RAP3W3EO4MGJDOVUQEA0FG1YEWMG23LMR00A3WHZ55GNQL",
-      query: "coffee",
-      near: "Bucarest",
-      radius: "50000",
-      v: "20190902"
+      client_id: "RI1LDPFFA2C2K0C0DP0TBBY2JTWA30F2O0DNMJTZRQGVXL3P", //foursquare client id
+      client_secret: "P2RAP3W3EO4MGJDOVUQEA0FG1YEWMG23LMR00A3WHZ55GNQL", // foursquare client secret
+      query: "coffee", //type of information we are requesting to foursquare api
+      near: "Bucarest", //near bucarest city
+      radius: "50000", //radius of requested data on Bucharest
+      v: "20190902" //date
     };
-    //async request
+    //async request, reading and updating query params https://javascriptplayground.com/url-search-params/
     fetch(venuesAPI + new URLSearchParams(params), {
       method: "GET"
     })
@@ -52,14 +55,14 @@ class App extends Component {
         setVenueState(
           { venues: response.response.groups[0].items },
           this.loadMap()
-          //because it's an async request, the loadMap function should be launched AFTER we receive information from external source
+          //because it's an async request, the loadMap function should be executed AFTER we receive information from external source
         );
       })
       //console.log(response);
       .catch(error => {
         // Code for handling errors, an alert message will popup when there is an error loading foursquare api
         alert(
-          "Ups! We're sorry, something went wrong while loading Foursquare info  >:(  try again pressing OK button"
+          "Ups! We're sorry, something went wrong while loading Foursquare info  >:(  try again by pressing OK button"
         );
         //console.log("error " + error);
       });
@@ -70,7 +73,7 @@ class App extends Component {
     const map = new window.google.maps.Map(document.getElementById("map"), {
       center: { lat: 44.435524, lng: 26.102536 },
       zoom: 15,
-      //maps style wizard https://mapstyle.withgoogle.com/
+      //google maps style wizard https://mapstyle.withgoogle.com/
       styles: [
         {
           elementType: "geometry",
@@ -345,26 +348,27 @@ class App extends Component {
             }
           ]
         }
-      ]
+      ] //don't forget this line has been collapsed to the quantity of code
     });
+    //adding variable for the searchbox input field
     const searchBox = new window.google.maps.places.SearchBox(
       document.getElementById("places-search")
     );
     // Bias the searchbox to within the bounds of the map.
     searchBox.setBounds(map.getBounds());
     //https://developers.google.com/maps/documentation/javascript/infowindows
-    //removed infowindow from array function to avoid multiple open infowindows
+    //removed below variable "infowindow" from array function (this.state.venues.map) to avoid multiple open infowindows simultaneosly
     const infowindow = new window.google.maps.InfoWindow();
     //marker function should load at the same time with google maps function, they should display simultaneosly
-    //project code 3 windowsshoppingpart1, quote: uses the location array to create an array of markers on initialize, for react should be used .map using value's state
-    //using map to loop over venues state, inital state empty but will retrieve the 30 venues we got
+    //project code 3 windowsshoppingpart1, quote: uses the location array to create an array of markers on initialize, for react should be used .map using venue's state
+    //using map to loop over venues state, inital state empty but will retrieve the 30 venues we got from the fetch call
     this.state.venues.map(aVenue => {
-      //declaration which will load the infowindow in the page
+      //variable which will load the infowindow in the page, will provide name of the place and address
       const contentString = `${aVenue.venue.name},
       ${aVenue.venue.location.address},`;
-      //need to make on photoshop the marker
+      //variable which saves marker's new icon
       const image = "http://i64.tinypic.com/macq41.png"
-      //declaration which loads the markers in the page
+      //variable which loads the markers in the page
       let marker = new window.google.maps.Marker({
         title: aVenue.venue.name,
         map: map,
@@ -376,10 +380,10 @@ class App extends Component {
           key: aVenue.venue.id
         }
       });
-      //add new markers to markers array, so we can use it to filter through search each marker
+      //add new markers to marker array, so we can use it to filter through search each marker
       this.markers.push(marker)
       //console.log(marker)
-      //declaration which will listen for clicks in the markers and displays a small info window
+      //function which will listen for clicks in the markers and will animate the icon for 900 ms, also will zoom in selected marker
       marker.addListener("click", function() {
         marker.setAnimation(window.google.maps.Animation.BOUNCE);
         setTimeout(() => { marker.setAnimation(null)}, 900)
@@ -391,17 +395,19 @@ class App extends Component {
       });
       return marker;
     });
+    //function which will listen for infowindow close button, once the x is clicked will zoom out the area
     infowindow.addListener("closeclick", function() {
         map.panTo(this.getPosition());
         map.setZoom(15);
 
     })
+    //listeners for show all and hide all buttons
     //document.getElementById('show-listings').addEventListener('click', showListings);
     //document.getElementById('hide-listings').addEventListener('click', hideListings);
   };
-
+//function which will show the markers that match text input from the searchbox area
 filterVenues(query) {
-  //changed filter for foreach as we are not returning a value
+  //changed filter method for foreach method as we are not returning a value
   this.markers.forEach(marker => {
     //console.log(marker)
     //filter the markers by name and set visibility to true if it matches the query
@@ -416,7 +422,6 @@ filterVenues(query) {
     //if (!this.state.venues.length) return <p> se jodioooo </p>
     return (
       <main id="main">
-        {/*second request to add the map, a div with the id of map*/}
         <div className="navbar">COFFEE TIME: Search for cheapest coffee places arround Bucharest</div>
         <div className="options-box">
         <div className="markers-title">Search for nearby places</div>
@@ -434,6 +439,7 @@ filterVenues(query) {
           <input id="show-listings" type="button" value="Show all places"/>
           <input id="hide-listings" type="button" value="Hide them all" />
         </div>
+        {/*second request to add the map, a div with the id of map*/}
           <div id="map" />
         </div>
       </main>

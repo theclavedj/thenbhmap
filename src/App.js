@@ -63,8 +63,8 @@ class App extends Component {
   //https://developers.google.com/maps/documentation/javascript/tutorial
   initMap = () => {
     const map = new window.google.maps.Map(document.getElementById("map"), {
-      center: { lat: 44.426767, lng: 26.102538 },
-      zoom: 13,
+      center: { lat: 44.435524, lng: 26.102536 },
+      zoom: 15,
       styles: [
             {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
             {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
@@ -146,6 +146,11 @@ class App extends Component {
             }
           ]
     });
+    const searchBox = new window.google.maps.places.SearchBox(
+        document.getElementById('places-search'));
+    // Bias the searchbox to within the bounds of the map.
+    searchBox.setBounds(map.getBounds());
+
     //https://developers.google.com/maps/documentation/javascript/infowindows
     //removed infowindow from array function to avoid multiple open infowindows
     const infowindow = new window.google.maps.InfoWindow();
@@ -186,6 +191,9 @@ class App extends Component {
           <div className="options-box">
             <input id="show-listings" type="button" value="Show Listings"></input>
             <input id="hide-listings" type="button" value="Hide Listings"></input>
+            <span className="text">Search for nearby places</span>
+            <input id="places-search" type="text" placeholder="Ex: Coffee on Universitate"></input>
+            <input id="go-places" type="button" value="Go"></input>
           <div id="map">
           </div>
         </div>

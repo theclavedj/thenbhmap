@@ -7,7 +7,7 @@ class App extends Component {
     super();
     //state of component which will receive info from foursquare api
     this.state = {
-      query: '',
+      query: '', //empty string which will receive input from user and will show markers according to the search
       venues: [] //empty array which will be filled once the function getinfo loads the information from foursquare api async request
     };
     this.markers = [];
@@ -18,7 +18,7 @@ class App extends Component {
     this.getInfo();
     //console.log(this.getInfo);
   }
-
+//
   loadMap = () => {
     window.initMap = this.initMap;
     loadMapsAPI(
@@ -52,13 +52,14 @@ class App extends Component {
         setVenueState(
           { venues: response.response.groups[0].items },
           this.loadMap()
+          //because it's an async request, the loadMap function should be launched AFTER we receive information from external source
         );
       })
       //console.log(response);
       .catch(error => {
-        // Code for handling errors
+        // Code for handling errors, an alert message will popup when there is an error loading foursquare api
         alert(
-          "Ups! We're sorry, something went wrong while loading Foursquare info  >:(  try again in a couple of minutes"
+          "Ups! We're sorry, something went wrong while loading Foursquare info  >:(  try again pressing OK button"
         );
         //console.log("error " + error);
       });
@@ -362,12 +363,12 @@ class App extends Component {
       const contentString = `${aVenue.venue.name},
       ${aVenue.venue.location.address},`;
       //need to make on photoshop the marker
-      //const image = "http://i65.tinypic.com/2ufdseu.gif"
+      const image = "http://i64.tinypic.com/macq41.png"
       //declaration which loads the markers in the page
       let marker = new window.google.maps.Marker({
         title: aVenue.venue.name,
         map: map,
-        //icon: image,
+        icon: image,
         animation: window.google.maps.Animation.DROP,
         position: {
           lat: aVenue.venue.location.lat,
@@ -382,7 +383,7 @@ class App extends Component {
       marker.addListener("click", function() {
         marker.setAnimation(window.google.maps.Animation.BOUNCE);
         setTimeout(() => { marker.setAnimation(null)}, 900)
-        this.map.setZoom(17);
+        this.map.setZoom(18);
         this.map.setCenter(marker.position)
         //display content on InfoWindow
         infowindow.setContent(contentString);
@@ -400,7 +401,8 @@ class App extends Component {
   };
 
 filterVenues(query) {
-  this.markers.filter(marker => {
+  //changed filter for foreach as we are not returning a value
+  this.markers.forEach(marker => {
     //console.log(marker)
     //filter the markers by name and set visibility to true if it matches the query
     marker.title.toLowerCase().includes(query.toLowerCase()) === true ?
@@ -415,7 +417,7 @@ filterVenues(query) {
     return (
       <main id="main">
         {/*second request to add the map, a div with the id of map*/}
-        <div className="navbar">GIMMECOFFEE: Search for cheapest coffee places arround Bucharest</div>
+        <div className="navbar">COFFEE TIME: Search for cheapest coffee places arround Bucharest</div>
         <div className="options-box">
         <div className="markers-title">Search for nearby places</div>
         <div><input

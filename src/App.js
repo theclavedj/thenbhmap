@@ -147,10 +147,9 @@ class App extends Component {
           ]
     });
     const searchBox = new window.google.maps.places.SearchBox(
-        document.getElementById('places-search'));
-    // Bias the searchbox to within the bounds of the map.
-    searchBox.setBounds(map.getBounds());
-
+                document.getElementById('places-search'));
+            // Bias the searchbox to within the bounds of the map.
+            searchBox.setBounds(map.getBounds());
     //https://developers.google.com/maps/documentation/javascript/infowindows
     //removed infowindow from array function to avoid multiple open infowindows
     const infowindow = new window.google.maps.InfoWindow();
@@ -161,12 +160,14 @@ class App extends Component {
     this.state.venues.map(aVenue => {
       //declaration which will load the infowindow in the page
       const contentString = `${aVenue.venue.name},
-      ${aVenue.venue.location.address}`;
-
+      ${aVenue.venue.location.address},`;
+      //need to make on photoshop the marker
+      //const image = "http://i65.tinypic.com/2ufdseu.gif"
       //declaration which loads the markers in the page
       const marker = new window.google.maps.Marker({
         title: aVenue.venue.name,
         map: map,
+        //icon: image,
         animation: window.google.maps.Animation.DROP,
         position: {
           lat: aVenue.venue.location.lat,
@@ -180,8 +181,12 @@ class App extends Component {
         infowindow.setContent(contentString);
         infowindow.open(map, marker);
       });
+      return marker
     });
+    //document.getElementById('show-listings').addEventListener('click', showListings);
+    //document.getElementById('hide-listings').addEventListener('click', hideListings);
   };
+
 
   render() {
     //if (!this.state.venues.length) return <p> se jodioooo </p>
@@ -212,5 +217,4 @@ function loadMapsAPI(src) {
   script.defer = true;
   ref.parentNode.insertBefore(script, ref);
 }
-
 export default App;

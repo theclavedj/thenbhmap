@@ -7,6 +7,7 @@ class App extends Component {
     super();
     //state of component which will receive info from foursquare api
     this.state = {
+      query: '',
       venues: [] //empty array which will be filled once the function getinfo loads the information from foursquare api async request
     };
   }
@@ -56,7 +57,10 @@ class App extends Component {
       //console.log(response);
       .catch(error => {
         // Code for handling errors
-        console.log("error " + error);
+        alert(
+          "Ups! We're sorry, something went wrong while loading Foursquare info  >:(  try again in a couple of minutes"
+        );
+        //console.log("error " + error);
       });
   }
   //third required part to load the map, map variable plus js function to load the map
@@ -66,90 +70,286 @@ class App extends Component {
       center: { lat: 44.435524, lng: 26.102536 },
       zoom: 15,
       styles: [
-            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
-            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-            {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+        {
+          elementType: "geometry",
+          stylers: [
             {
-              featureType: 'administrative.locality',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#d59563'}]
-            },
-            {
-              featureType: 'poi',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#d59563'}]
-            },
-            {
-              featureType: 'poi.park',
-              elementType: 'geometry',
-              stylers: [{color: '#263c3f'}]
-            },
-            {
-              featureType: 'poi.park',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#6b9a76'}]
-            },
-            {
-              featureType: 'road',
-              elementType: 'geometry',
-              stylers: [{color: '#38414e'}]
-            },
-            {
-              featureType: 'road',
-              elementType: 'geometry.stroke',
-              stylers: [{color: '#212a37'}]
-            },
-            {
-              featureType: 'road',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#9ca5b3'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'geometry',
-              stylers: [{color: '#746855'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'geometry.stroke',
-              stylers: [{color: '#1f2835'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#f3d19c'}]
-            },
-            {
-              featureType: 'transit',
-              elementType: 'geometry',
-              stylers: [{color: '#2f3948'}]
-            },
-            {
-              featureType: 'transit.station',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#d59563'}]
-            },
-            {
-              featureType: 'water',
-              elementType: 'geometry',
-              stylers: [{color: '#17263c'}]
-            },
-            {
-              featureType: 'water',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#515c6d'}]
-            },
-            {
-              featureType: 'water',
-              elementType: 'labels.text.stroke',
-              stylers: [{color: '#17263c'}]
+              color: "#1d2c4d"
             }
           ]
+        },
+        {
+          elementType: "labels.text.fill",
+          stylers: [
+            {
+              color: "#8ec3b9"
+            }
+          ]
+        },
+        {
+          elementType: "labels.text.stroke",
+          stylers: [
+            {
+              color: "#1a3646"
+            }
+          ]
+        },
+        {
+          featureType: "administrative.country",
+          elementType: "geometry.stroke",
+          stylers: [
+            {
+              color: "#4b6878"
+            }
+          ]
+        },
+        {
+          featureType: "administrative.land_parcel",
+          elementType: "labels.text.fill",
+          stylers: [
+            {
+              color: "#64779e"
+            }
+          ]
+        },
+        {
+          featureType: "administrative.province",
+          elementType: "geometry.stroke",
+          stylers: [
+            {
+              color: "#4b6878"
+            }
+          ]
+        },
+        {
+          featureType: "landscape.man_made",
+          elementType: "geometry.stroke",
+          stylers: [
+            {
+              color: "#334e87"
+            }
+          ]
+        },
+        {
+          featureType: "landscape.natural",
+          elementType: "geometry",
+          stylers: [
+            {
+              color: "#023e58"
+            }
+          ]
+        },
+        {
+          featureType: "poi",
+          elementType: "geometry",
+          stylers: [
+            {
+              color: "#283d6a"
+            }
+          ]
+        },
+        {
+          featureType: "poi",
+          elementType: "labels.text.fill",
+          stylers: [
+            {
+              color: "#6f9ba5"
+            }
+          ]
+        },
+        {
+          featureType: "poi",
+          elementType: "labels.text.stroke",
+          stylers: [
+            {
+              color: "#1d2c4d"
+            }
+          ]
+        },
+        {
+          featureType: "poi.business",
+          stylers: [
+            {
+              visibility: "off"
+            }
+          ]
+        },
+        {
+          featureType: "poi.park",
+          elementType: "geometry.fill",
+          stylers: [
+            {
+              color: "#023e58"
+            }
+          ]
+        },
+        {
+          featureType: "poi.park",
+          elementType: "labels.text",
+          stylers: [
+            {
+              visibility: "off"
+            }
+          ]
+        },
+        {
+          featureType: "poi.park",
+          elementType: "labels.text.fill",
+          stylers: [
+            {
+              color: "#3C7680"
+            }
+          ]
+        },
+        {
+          featureType: "road",
+          elementType: "geometry",
+          stylers: [
+            {
+              color: "#304a7d"
+            }
+          ]
+        },
+        {
+          featureType: "road",
+          elementType: "labels.text.fill",
+          stylers: [
+            {
+              color: "#98a5be"
+            }
+          ]
+        },
+        {
+          featureType: "road",
+          elementType: "labels.text.stroke",
+          stylers: [
+            {
+              color: "#1d2c4d"
+            }
+          ]
+        },
+        {
+          featureType: "road.arterial",
+          stylers: [
+            {
+              visibility: "off"
+            }
+          ]
+        },
+        {
+          featureType: "road.highway",
+          elementType: "geometry",
+          stylers: [
+            {
+              color: "#2c6675"
+            }
+          ]
+        },
+        {
+          featureType: "road.highway",
+          elementType: "geometry.stroke",
+          stylers: [
+            {
+              color: "#255763"
+            }
+          ]
+        },
+        {
+          featureType: "road.highway",
+          elementType: "labels",
+          stylers: [
+            {
+              visibility: "off"
+            }
+          ]
+        },
+        {
+          featureType: "road.highway",
+          elementType: "labels.text.fill",
+          stylers: [
+            {
+              color: "#b0d5ce"
+            }
+          ]
+        },
+        {
+          featureType: "road.highway",
+          elementType: "labels.text.stroke",
+          stylers: [
+            {
+              color: "#023e58"
+            }
+          ]
+        },
+        {
+          featureType: "road.local",
+          stylers: [
+            {
+              visibility: "off"
+            }
+          ]
+        },
+        {
+          featureType: "transit",
+          elementType: "labels.text.fill",
+          stylers: [
+            {
+              color: "#98a5be"
+            }
+          ]
+        },
+        {
+          featureType: "transit",
+          elementType: "labels.text.stroke",
+          stylers: [
+            {
+              color: "#1d2c4d"
+            }
+          ]
+        },
+        {
+          featureType: "transit.line",
+          elementType: "geometry.fill",
+          stylers: [
+            {
+              color: "#283d6a"
+            }
+          ]
+        },
+        {
+          featureType: "transit.station",
+          elementType: "geometry",
+          stylers: [
+            {
+              color: "#3a4762"
+            }
+          ]
+        },
+        {
+          featureType: "water",
+          elementType: "geometry",
+          stylers: [
+            {
+              color: "#0e1626"
+            }
+          ]
+        },
+        {
+          featureType: "water",
+          elementType: "labels.text.fill",
+          stylers: [
+            {
+              color: "#4e6d70"
+            }
+          ]
+        }
+      ]
     });
     const searchBox = new window.google.maps.places.SearchBox(
-                document.getElementById('places-search'));
-            // Bias the searchbox to within the bounds of the map.
-            searchBox.setBounds(map.getBounds());
+      document.getElementById("places-search")
+    );
+    // Bias the searchbox to within the bounds of the map.
+    searchBox.setBounds(map.getBounds());
     //https://developers.google.com/maps/documentation/javascript/infowindows
     //removed infowindow from array function to avoid multiple open infowindows
     const infowindow = new window.google.maps.InfoWindow();
@@ -181,26 +381,36 @@ class App extends Component {
         infowindow.setContent(contentString);
         infowindow.open(map, marker);
       });
-      return marker
+      return marker;
     });
     //document.getElementById('show-listings').addEventListener('click', showListings);
     //document.getElementById('hide-listings').addEventListener('click', hideListings);
   };
 
+filterVenues(query) {
+  console.log(query)
+}
 
   render() {
     //if (!this.state.venues.length) return <p> se jodioooo </p>
     return (
       <main>
         {/*second request to add the map, a div with the id of map*/}
-          <div className="options-box">
-            <input id="show-listings" type="button" value="Show Listings"></input>
-            <input id="hide-listings" type="button" value="Hide Listings"></input>
-            <span className="text">Search for nearby places</span>
-            <input id="places-search" type="text" placeholder="Ex: Coffee on Universitate"></input>
-            <input id="go-places" type="button" value="Go"></input>
-          <div id="map">
-          </div>
+        <div className="options-box">
+          <input id="show-listings" type="button" value="Show Listings" />
+          <input id="hide-listings" type="button" value="Hide Listings" />
+          <span className="text">Search for nearby places</span>
+          <input
+            id="places-search"
+            type="text"
+            placeholder="Ex: Coffee on Universitate"
+            /*below the value will be the state of what the user wrote*/
+            value={this.state.query}
+            /*on change the event listener invokes updateQuery, then calls setState*/
+            onChange={event => this.filterVenues(event.target.value)}
+          />
+          <input id="go-places" type="button" value="Go" />
+          <div id="map" />
         </div>
       </main>
     );

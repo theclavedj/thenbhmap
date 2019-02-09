@@ -38,7 +38,7 @@ class App extends Component {
       client_secret: "P2RAP3W3EO4MGJDOVUQEA0FG1YEWMG23LMR00A3WHZ55GNQL",
       query: "coffee",
       near: "Bucarest",
-      radius: "2500",
+      radius: "25000",
       price: "1,2",
       v: "20190602"
     };
@@ -70,6 +70,7 @@ class App extends Component {
     const map = new window.google.maps.Map(document.getElementById("map"), {
       center: { lat: 44.435524, lng: 26.102536 },
       zoom: 15,
+      //maps style wizard https://mapstyle.withgoogle.com/
       styles: [
         {
           elementType: "geometry",
@@ -405,22 +406,25 @@ filterVenues(query) {
   render() {
     //if (!this.state.venues.length) return <p> se jodioooo </p>
     return (
-      <main>
+      <main id="main">
         {/*second request to add the map, a div with the id of map*/}
+        <div className="navbar">GIMMECOFFEE: Search for cheapest coffee places arround Bucharest</div>
         <div className="options-box">
-          <input id="show-listings" type="button" value="Show Listings" />
-          <input id="hide-listings" type="button" value="Hide Listings" />
-          <span className="text">Search for nearby places</span>
-          <input
-            id="places-search"
-            type="text"
-            placeholder="Ex: Coffee on Universitate"
-            /*below the value will be the state of what the user wrote*/
-            value={this.state.query}
-            /*on change the event listener invokes filterVenues, then calls setState*/
-            onChange={event => this.filterVenues(event.target.value)}
-          />
-          <input id="go-places" type="button" value="Go" />
+        <div className="markers-title">Search for nearby places</div>
+        <div><input
+        id="places-search"
+        type="text"
+        placeholder="Type name of fav coffee place"
+        /*below the value will be the state of what the user wrote*/
+        value={this.state.query}
+        /*on change the event listener invokes filterVenues, then calls setState*/
+        onChange={event => this.filterVenues(event.target.value)}
+        />
+        <input id="go-places" type="button" value="Go" /></div>
+        <div>
+          <input id="show-listings" type="button" value="Show all places"/>
+          <input id="hide-listings" type="button" value="Hide them all" />
+        </div>
           <div id="map" />
         </div>
       </main>

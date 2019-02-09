@@ -354,7 +354,6 @@ class App extends Component {
     //https://developers.google.com/maps/documentation/javascript/infowindows
     //removed infowindow from array function to avoid multiple open infowindows
     const infowindow = new window.google.maps.InfoWindow();
-
     //marker function should load at the same time with google maps function, they should display simultaneosly
     //project code 3 windowsshoppingpart1, quote: uses the location array to create an array of markers on initialize, for react should be used .map using value's state
     //using map to loop over venues state, inital state empty but will retrieve the 30 venues we got
@@ -381,12 +380,21 @@ class App extends Component {
       //console.log(marker)
       //declaration which will listen for clicks in the markers and displays a small info window
       marker.addListener("click", function() {
+        marker.setAnimation(window.google.maps.Animation.BOUNCE);
+        setTimeout(() => { marker.setAnimation(null)}, 900)
+        this.map.setZoom(17);
+        this.map.setCenter(marker.position)
         //display content on InfoWindow
         infowindow.setContent(contentString);
         infowindow.open(map, marker);
       });
       return marker;
     });
+    infowindow.addListener("closeclick", function() {
+        map.panTo(this.getPosition());
+        map.setZoom(15);
+
+    })
     //document.getElementById('show-listings').addEventListener('click', showListings);
     //document.getElementById('hide-listings').addEventListener('click', hideListings);
   };

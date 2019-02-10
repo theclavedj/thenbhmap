@@ -2,17 +2,25 @@ import React, { Component } from "react";
 import "./App.css";
 import "whatwg-fetch";
 import { Venues } from './Venues';
+import { Searchbox } from './Searchbox'
 
 class App extends Component {
   //proper usage of constructor and super https://reactjs.org/docs/react-component.html
-  constructor(props) {
-    super(props);
+  constructor() {
+
+    super();
     //state of component which will receive info from foursquare api
     this.state = {
       query: '', //empty string which will receive input from user and will show markers according to the search
-      venues: [] //empty array which will be filled once the function getinfo loads the information from foursquare api async request
+      venues: [], //empty array which will be filled once the function getinfo loads the information from foursquare api async request
+      locationImages: []
     };
-    this.markers = []; //empty array of markers which will be filled later on
+    this.markers = [] //empty array of markers which will be filled later on
+
+  }
+
+  handleSubmit(query) {
+    this.getVenues(query);
   }
 
   componentDidMount() {
@@ -31,7 +39,7 @@ class App extends Component {
   //https://developer.foursquare.com/docs/api
   //create venue app using react with foursquare api http://stevebrown.co/journal/creating-a-local-venue-app-using-reactredux-with-the-foursquare-api-part-i
   // react docs, ajax and apis https://reactjs.org/docs/faq-ajax.html
-  getInfo() {
+  getInfo(query) {
     //this is necesary as we are working with constructor and super definitions
     let setVenueState = this.setState.bind(this);
     //variable which saves default foursquare url
@@ -411,7 +419,7 @@ filterVenues(query) {
   //got 30 items
   //let filterByInput = this.state.filteredVenues.filter(venue => venue.venue.name.toLowerCase().includes(query.toLowerCase()))
   //changed filter method for foreach method as we are not returning a value
-  this.markers.forEach(marker => {
+  this.markers.map(marker => {
     //console.log(marker)
     let filterByInput = this.state.venues.filter(venue => venue.venue.name.toLowerCase().includes(query.toLowerCase()))
     this.setState({ filteredVenues: filterByInput });
@@ -421,6 +429,7 @@ filterVenues(query) {
       marker.setVisible(false);
     })
     this.setState({ query });
+    return
   }
 //listeners for show all and hide all buttons
 //document.getElementById('show-listings').addEventListener('click', showListings);
@@ -445,23 +454,23 @@ filterVenues(query) {
         <div className="options-box">
         <div className="markers-title">Search for nearby places</div>
         <div><input
-        id="places-search"
-        type="text"
-        placeholder="Type name of fav coffee place"
-        /*below the value will be the state of what the user wrote*/
-        value={this.state.query}
-        /*on change the event listener invokes filterVenues, then calls setState*/
-        onChange={(e) => this.filterVenues(e.target.value)}
-        />
-        <input id="go-places" type="button" value="Go" /></div>
+id="places-search"
+type="text"
+placeholder="Type name of fav coffee place"
+/*below the value will be the state of what the user wrote*/
+value={this.state.query}
+/*on change the event listener invokes filterVenues, then calls setState*/
+onChange={(e) => this.filterVenues(e.target.value)}
+/>
+<input id="go-places" type="button" value="Go" /></div>
         <ol>{venueList}</ol>
+        </div>
         {/*<div>
           <input id="show-listings" type="button" value="Show all places"/>
           <input id="hide-listings" type="button" value="Hide them all" />
         </div>*/}
         {/*second request to add the map, a div with the id of map*/}
-        </div>
-      </main>
+        </main>
     );
   }
 }

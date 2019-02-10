@@ -50,7 +50,6 @@ html, body {
   width: auto;
   color: #302745;
   text-align: center;
-  height: 25px;
   width: 260px;
   display: table;
   max-height: 70%;
@@ -59,20 +58,16 @@ html, body {
 .venues-list:hover {
   color: #f1f1f1;
   border: 1px solid #f1f1f1;
+  cursor: pointer;
 }
 
 #map {
-  bottom:0px;
-  height: 92vh;
-  left: 362px;
-  position: fixed;
-  right: 0px;
+  height: 100vh;
 }
 
 .options-box {
   background: #040620;
   height: 92%;
-  line-height: 35px;
   padding: 0vh 10px 0px 10px;
   margin-top: 8vh;
   text-align: center;

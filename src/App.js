@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import "./App.css";
 import "whatwg-fetch";
+import { Venues } from './Venues';
 
 class App extends Component {
   //proper usage of constructor and super https://reactjs.org/docs/react-component.html
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     //state of component which will receive info from foursquare api
     this.state = {
       query: '', //empty string which will receive input from user and will show markers according to the search
@@ -406,16 +407,20 @@ class App extends Component {
   };
 //function which will show the markers that match text input from the searchbox area
 filterVenues(query) {
+  //console.log(this.state.venues)
+  //got 30 items
+  //let filterByInput = this.state.venues.filter(venue => venue.venue.name.includes(query))
   //changed filter method for foreach method as we are not returning a value
   this.markers.forEach(marker => {
     //console.log(marker)
     //filter the markers by name and set visibility to true if it matches the query
-    marker.title.toLowerCase().includes(query.toLowerCase()) === true ?
-    marker.setVisible(true) :
-    marker.setVisible(false);
-  })
-  this.setState({ query });
-}
+      marker.title.toLowerCase().includes(query.toLowerCase()) === true ?
+      marker.setVisible(true) :
+      marker.setVisible(false);
+    })
+    this.setState({ query });
+    //this.setState({filterByInput})
+  }
 //listeners for show all and hide all buttons
 //document.getElementById('show-listings').addEventListener('click', showListings);
 //  document.getElementById("hide-listings").window.addEventListener('click', this.hideListings);
@@ -428,12 +433,14 @@ filterVenues(query) {
 
   render() {
     //if (!this.state.venues.length) return <p> se jodioooo </p>
-    const venueList = this.state.venues.map(item =>
-    <li className="venues-list" key={item.venue.id}>{item.venue.name}</li>
+    const venueList = this.state.venues.map((item, i) =>
+    <Venues key={i} name={item.venue.name}/>
+    //<li className="venues-list" key={item.venue.id}>{item.venue.name}</li>
   )
     return (
       <main id="main">
         <div className="navbar">COFFEE TIME: Search for cheapest coffee places arround Bucharest</div>
+        <div id="map"/>
         <div className="options-box">
         <div className="markers-title">Search for nearby places</div>
         <div><input
@@ -452,7 +459,6 @@ filterVenues(query) {
           <input id="hide-listings" type="button" value="Hide them all" />
         </div>*/}
         {/*second request to add the map, a div with the id of map*/}
-          <div id="map" />
         </div>
       </main>
     );

@@ -385,8 +385,8 @@ class App extends Component {
       //add new markers to marker array, so we can use it to filter through search each marker
       this.markers.push(marker);
       //console.log(marker)
-      this.setState({ aVenue })
-      //console.log(aVenue)
+      this.setState({ filteredVenues: this.state.venues })
+      //sconsole.log(this.state.venues)
       //function which will listen for clicks in the markers and will animate the icon for 900 ms, also will zoom in selected marker
       marker.addListener("click", function() {
         marker.setAnimation(window.google.maps.Animation.BOUNCE);
@@ -409,17 +409,18 @@ class App extends Component {
 filterVenues(query) {
   //console.log(this.state.venues)
   //got 30 items
-  //let filterByInput = this.state.venues.filter(venue => venue.venue.name.includes(query))
+  //let filterByInput = this.state.filteredVenues.filter(venue => venue.venue.name.toLowerCase().includes(query.toLowerCase()))
   //changed filter method for foreach method as we are not returning a value
   this.markers.forEach(marker => {
     //console.log(marker)
+    let filterByInput = this.state.venues.filter(venue => venue.venue.name.toLowerCase().includes(query.toLowerCase()))
+    this.setState({ filteredVenues: filterByInput });
     //filter the markers by name and set visibility to true if it matches the query
       marker.title.toLowerCase().includes(query.toLowerCase()) === true ?
       marker.setVisible(true) :
       marker.setVisible(false);
     })
     this.setState({ query });
-    //this.setState({filterByInput})
   }
 //listeners for show all and hide all buttons
 //document.getElementById('show-listings').addEventListener('click', showListings);
@@ -450,7 +451,7 @@ filterVenues(query) {
         /*below the value will be the state of what the user wrote*/
         value={this.state.query}
         /*on change the event listener invokes filterVenues, then calls setState*/
-        onChange={event => this.filterVenues(event.target.value)}
+        onChange={(e) => this.filterVenues(e.target.value)}
         />
         <input id="go-places" type="button" value="Go" /></div>
         <ol>{venueList}</ol>

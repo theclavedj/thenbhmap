@@ -46,18 +46,19 @@ html, body {
 }
 
 .venues-list {
-  border: 1px solid grey;
+  border: 1px solid #302745;
   width: auto;
   color: #302745;
   text-align: center;
   height: 25px;
-  width: 270px;
+  width: 260px;
   display: table;
   max-height: 70%;
 }
 
 .venues-list:hover {
   color: #f1f1f1;
+  border: 1px solid #f1f1f1;
 }
 
 #map {

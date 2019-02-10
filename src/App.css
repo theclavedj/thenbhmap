@@ -45,33 +45,55 @@ html, body {
   margin-right: 10px;
 }
 
+.venues-list {
+  border: 1px solid grey;
+  width: auto;
+  color: #302745;
+  text-align: center;
+  height: 25px;
+  width: 270px;
+  display: table;
+  max-height: 70%;
+}
+
+.venues-list:hover {
+  color: #f1f1f1;
+}
+
 #map {
   bottom:0px;
   height: 92vh;
   left: 362px;
-  position: absolute;
+  position: fixed;
   right: 0px;
 }
 
 .options-box {
   background: #040620;
-  height: 89vh;
+  height: 92%;
   line-height: 35px;
-  padding: 0px 10px 0px 10px;
+  padding: 8vh 10px 0px 10px;
   text-align: center;
   width: 342px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
 }
 
 #places-search {
   width: 220px;
   margin-bottom: 20px;
   font-family:Montserrat;
+  margin-left: 25px;
 }
 
 .navbar {
-  height: 8vh;
-  max-width: 100%;
-  position: relative;
+  height: 6vh;
+  display: block;
+  position: fixed;
+  z-index: 1;
+  min-width: 100%;
   background: #040620;
   color: #fff;
   font-family:Baloo thambi;
@@ -89,4 +111,5 @@ html, body {
 	font-weight:bold;
   text-align: center;
   margin-bottom: 10px;
+  margin-top: 10px;
 }

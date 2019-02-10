@@ -350,12 +350,13 @@ class App extends Component {
         }
       ] //don't forget this line has been collapsed to the quantity of code
     });
-    //adding variable for the searchbox input field
-    const searchBox = new window.google.maps.places.SearchBox(
+    //adding variable for the searchbox input field and autocomplete
+    const searchBox = new window.google.maps.places.Autocomplete(
       document.getElementById("places-search")
     );
     // Bias the searchbox to within the bounds of the map.
-    searchBox.setBounds(map.getBounds());
+    searchBox.bindTo("bounds", map);
+
     //https://developers.google.com/maps/documentation/javascript/infowindows
     //removed below variable "infowindow" from array function (this.state.venues.map) to avoid multiple open infowindows simultaneosly
     const infowindow = new window.google.maps.InfoWindow();
@@ -381,12 +382,14 @@ class App extends Component {
         }
       });
       //add new markers to marker array, so we can use it to filter through search each marker
-      this.markers.push(marker)
+      this.markers.push(marker);
       //console.log(marker)
+      this.setState({ aVenue })
+      //console.log(aVenue)
       //function which will listen for clicks in the markers and will animate the icon for 900 ms, also will zoom in selected marker
       marker.addListener("click", function() {
         marker.setAnimation(window.google.maps.Animation.BOUNCE);
-        setTimeout(() => { marker.setAnimation(null)}, 900)
+        setTimeout(() => { marker.setAnimation(null)}, 1000)
         this.map.setZoom(18);
         this.map.setCenter(marker.position)
         //display content on InfoWindow
@@ -399,11 +402,7 @@ class App extends Component {
     infowindow.addListener("closeclick", function() {
         map.panTo(this.getPosition());
         map.setZoom(15);
-
     })
-    //listeners for show all and hide all buttons
-    //document.getElementById('show-listings').addEventListener('click', showListings);
-    //document.getElementById('hide-listings').addEventListener('click', hideListings);
   };
 //function which will show the markers that match text input from the searchbox area
 filterVenues(query) {
@@ -417,9 +416,21 @@ filterVenues(query) {
   })
   this.setState({ query });
 }
+//listeners for show all and hide all buttons
+//document.getElementById('show-listings').addEventListener('click', showListings);
+//  document.getElementById("hide-listings").window.addEventListener('click', this.hideListings);
+  //hideListings() {
+  //  console.log("click" + 1)
+  //  this.markers.forEach(marker => {
+  //    marker.setVisible(false)
+  //  })
+  //}
 
   render() {
     //if (!this.state.venues.length) return <p> se jodioooo </p>
+    const venueList = this.state.venues.map(item =>
+    <li className="venues-list" key={item.venue.id}>{item.venue.name}</li>
+  )
     return (
       <main id="main">
         <div className="navbar">COFFEE TIME: Search for cheapest coffee places arround Bucharest</div>
@@ -435,10 +446,11 @@ filterVenues(query) {
         onChange={event => this.filterVenues(event.target.value)}
         />
         <input id="go-places" type="button" value="Go" /></div>
-        <div>
+        <ol>{venueList}</ol>
+        {/*<div>
           <input id="show-listings" type="button" value="Show all places"/>
           <input id="hide-listings" type="button" value="Hide them all" />
-        </div>
+        </div>*/}
         {/*second request to add the map, a div with the id of map*/}
           <div id="map" />
         </div>

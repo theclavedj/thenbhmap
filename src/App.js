@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import "whatwg-fetch";
 import { Venues } from './Venues';
+import GoogleMaps from "./GoogleMaps"
 
 class App extends Component {
   //proper usage of constructor and super https://reactjs.org/docs/react-component.html
@@ -450,7 +451,7 @@ filterVenues(query) {
     return (
         <main id="main">
           <div className="navbar">COFFEE TIME: Search for cheapest coffee places arround Bucharest</div>
-          <div role="application" aria-hidden="true" id="map"/>
+          <GoogleMaps/>
           <div className="options-box">
           <div className="markers-title">Search for nearby places</div>
           <div>
@@ -467,7 +468,6 @@ filterVenues(query) {
               <input className="submit-button" type="submit" value="Submit" />
               <ol>
               {venueList}
-              text
               </ol>
           {/*<div>
             <input id="show-listings" type="button" value="Show all places"/>

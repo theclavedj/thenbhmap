@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./App.css";
 import "whatwg-fetch";
 import { Venues } from './Venues';
-import { Searchbox } from './Searchbox'
 
 class App extends Component {
   //proper usage of constructor and super https://reactjs.org/docs/react-component.html
@@ -19,8 +18,10 @@ class App extends Component {
 
   }
 
-  handleSubmit(query) {
-    this.getVenues(query);
+  updateQuery = (query) => {
+    this.setState({
+      query: query
+    })
   }
 
   componentDidMount() {
@@ -431,38 +432,30 @@ filterVenues(query) {
     this.setState({ query });
     return
   }
-//listeners for show all and hide all buttons
-//document.getElementById('show-listings').addEventListener('click', showListings);
-//  document.getElementById("hide-listings").window.addEventListener('click', this.hideListings);
-  //hideListings() {
-  //  console.log("click" + 1)
-  //  this.markers.forEach(marker => {
-  //    marker.setVisible(false)
-  //  })
-  //}
 
   render() {
     //if (!this.state.venues.length) return <p> se jodioooo </p>
     const venueList = this.state.venues.map((item, i) =>
-    <Venues key={i} name={item.venue.name}/>
+    <Venues key={i} name={item.venue.name} onClick={(event) => window.google.maps.event.trigger(item.maker, "click")}
+    />
     //<li className="venues-list" key={item.venue.id}>{item.venue.name}</li>
   )
     return (
       <main id="main">
         <div className="navbar">COFFEE TIME: Search for cheapest coffee places arround Bucharest</div>
-        <div id="map"/>
+        <div role="application" aria-hidden="true" id="map"/>
         <div className="options-box">
         <div className="markers-title">Search for nearby places</div>
         <div><input
-id="places-search"
-type="text"
-placeholder="Type name of fav coffee place"
-/*below the value will be the state of what the user wrote*/
-value={this.state.query}
-/*on change the event listener invokes filterVenues, then calls setState*/
-onChange={(e) => this.filterVenues(e.target.value)}
-/>
-<input id="go-places" type="button" value="Go" /></div>
+            id="places-search"
+            type="text"
+            placeholder="Type name of fav coffee place"
+            /*below the value will be the state of what the user wrote*/
+            value={this.state.query}
+            /*on change the event listener invokes filterVenues, then calls setState*/
+            onChange={(e) => this.filterVenues(e.target.value)}
+            />
+            <input id="go-places" type="button" value="Go" /></div>
         <ol>{venueList}</ol>
         </div>
         {/*<div>

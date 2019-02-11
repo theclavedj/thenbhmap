@@ -6,14 +6,17 @@ html, body {
   padding: 0;
 }
 
+@media screen and (max-width: 450px) {
+
 .venues-list {
   border: 1px solid #302745;
-  width: auto;
   color: #302745;
   text-align: center;
-  width: 260px;
+  font-size: 10px;
+  width: 130px;
   display: table;
-  max-height: 70%;
+  max-height: 100%;
+  padding-left: 2px;
 }
 
 .venues-list:hover {
@@ -28,11 +31,11 @@ html, body {
 
 .options-box {
   background: #040620;
-  height: 92%;
+  height: 94%;
   padding: 0vh 10px 0px 10px;
   margin-top: 8vh;
   text-align: center;
-  width: 342px;
+  width: 150px;
   top: 0;
   left: 0;
   position: fixed;
@@ -41,15 +44,35 @@ html, body {
   transition: 0.5s;
 }
 
+.options-box ol {
+  background: #040620;
+  height: 94%;
+  padding: 0px 0px 0px 20px;
+  margin-top: 8vh;
+  text-align: center;
+  width: 150px;
+  top: 14vh;
+  left: 0;
+  position: fixed;
+  transition: 0.5s;
+}
+
 #places-search {
-  width: 220px;
-  margin-bottom: 20px;
+  width: 80px;
   font-family:Montserrat;
-  margin-left: 25px;
+  font-size: 10px;
+  height: 16px;
+}
+
+.submit-button {
+width: 50px;
+font-family: Montserrat;
+font-size: 8px;
+height: 22px;
 }
 
 .navbar {
-  height: 6vh;
+  height: 8vh;
   display: block;
   position: fixed;
   z-index: 1;
@@ -57,19 +80,91 @@ html, body {
   background: #040620;
   color: #fff;
   font-family:Baloo thambi;
-	font-size:25px;
+	font-size:15px;
   text-align: center;
-  padding-top: 20px;
 }
 
 .markers-title {
-  width: 342px;
+  width: 150px;
   height: 30px;
   color: #fff;
   font-family:Montserrat;
-	font-size:18px;
+	font-size:13px;
 	font-weight:bold;
   text-align: center;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+}
+
+@media screen and (min-width: 450px) {
+
+
+  .venues-list {
+    border: 1px solid #302745;
+    width: auto;
+    color: #302745;
+    text-align: center;
+    width: 260px;
+    display: table;
+    max-height: 70%;
+  }
+
+  .venues-list:hover {
+    color: #f1f1f1;
+    border: 1px solid #f1f1f1;
+    cursor: pointer;
+  }
+
+  #map {
+    height: 100vh;
+  }
+
+  .options-box {
+    background: #040620;
+    height: 92%;
+    padding: 0vh 10px 0px 10px;
+    margin-top: 8vh;
+    text-align: center;
+    width: 342px;
+    top: 0;
+    left: 0;
+    position: fixed;
+    overflow-x: hidden;
+    z-index: 1;
+    transition: 0.5s;
+  }
+
+  #places-search {
+    width: 220px;
+    margin-bottom: 20px;
+    font-family:Montserrat;
+    margin-left: 25px;
+  }
+
+  .navbar {
+    height: 6vh;
+    display: block;
+    position: fixed;
+    z-index: 1;
+    min-width: 100%;
+    background: #040620;
+    color: #fff;
+    font-family:Baloo thambi;
+  	font-size:25px;
+    text-align: center;
+    padding-top: 20px;
+  }
+
+  .markers-title {
+    width: 342px;
+    height: 30px;
+    color: #fff;
+    font-family:Montserrat;
+  	font-size:18px;
+  	font-weight:bold;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
 }

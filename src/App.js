@@ -5,14 +5,13 @@ import { Venues } from './Venues';
 
 class App extends Component {
   //proper usage of constructor and super https://reactjs.org/docs/react-component.html
-  constructor() {
+  constructor(props) {
 
-    super();
+    super(props);
     //state of component which will receive info from foursquare api
     this.state = {
       query: '', //empty string which will receive input from user and will show markers according to the search
-      venues: [], //empty array which will be filled once the function getinfo loads the information from foursquare api async request
-      locationImages: []
+      venues: [] //empty array which will be filled once the function getinfo loads the information from foursquare api async request
     };
     this.markers = [] //empty array of markers which will be filled later on
 
@@ -24,6 +23,7 @@ class App extends Component {
     })
   }
 
+
   componentDidMount() {
     //when the componentDidMount starts the loadmap function should be loaded to get google maps and also should call getinfo function to load foursquare api
     this.getInfo();
@@ -33,7 +33,7 @@ class App extends Component {
   loadMap = () => {
     window.initMap = this.initMap;
     loadMapsAPI(
-      "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=YOURAPIKEY&v=3&callback=initMap"
+      "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=INSERT-KEY-HERE&v=3&callback=initMap"
     );
     //console.log(window.initMap)
   };
@@ -55,6 +55,7 @@ class App extends Component {
       v: "20190902" //date
     };
     //async request, reading and updating query params https://javascriptplayground.com/url-search-params/
+    //https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
     fetch(venuesAPI + new URLSearchParams(params), {
       method: "GET"
     })
@@ -395,7 +396,7 @@ class App extends Component {
       this.markers.push(marker);
       //console.log(marker)
       this.setState({ filteredVenues: this.state.venues })
-      //sconsole.log(this.state.venues)
+      //console.log(this.state.venues)
       //function which will listen for clicks in the markers and will animate the icon for 900 ms, also will zoom in selected marker
       marker.addListener("click", function() {
         marker.setAnimation(window.google.maps.Animation.BOUNCE);
@@ -416,59 +417,66 @@ class App extends Component {
   };
 //function which will show the markers that match text input from the searchbox area
 filterVenues(query) {
-  //console.log(this.state.venues)
+  //console.log(query)
   //got 30 items
-  //let filterByInput = this.state.filteredVenues.filter(venue => venue.venue.name.toLowerCase().includes(query.toLowerCase()))
+  let filterByInput = this.state.venues.filter(venues => venues.venue.name.toLowerCase().includes(query.toLowerCase()))
   //changed filter method for foreach method as we are not returning a value
-  this.markers.map(marker => {
+  this.markers.forEach(marker => {
     //console.log(marker)
-    let filterByInput = this.state.venues.filter(venue => venue.venue.name.toLowerCase().includes(query.toLowerCase()))
-    this.setState({ filteredVenues: filterByInput });
     //filter the markers by name and set visibility to true if it matches the query
       marker.title.toLowerCase().includes(query.toLowerCase()) === true ?
       marker.setVisible(true) :
       marker.setVisible(false);
     })
-    this.setState({ query });
-    return query
+    this.setState({ filteredVenues: filterByInput, query });
   }
 
   render() {
-    const venueList = this.state.venues.map((item, i) =>
-    <Venues key={i} name={item.venue.name} onClick={(event) => window.google.maps.event.trigger(item.maker, "click")}
+    const venueList = this.state.venues.map(venues =>
+    <Venues key={venues.venue.id} name={venues.venue.name} onClick={(event) => window.google.maps.event.trigger(venueList.maker, "click")}
     />
+    //code on return between ol {venueList}
   )
-//console.log(venueList)
+//console.log(venueList.marker)
 //function venueLi(query) {
   //const listItems = this.state.query
   //console.log(this.state.query)
 //}
+//{this.state.filterByInput && this.state.filterByInput.lenght > 0 && this.state.filterByInput.map((venues) => (
+//  <ol key={venues.id}>
+//))
+//}
 
     return (
-      <main id="main">
-        <div className="navbar">COFFEE TIME: Search for cheapest coffee places arround Bucharest</div>
-        <div role="application" aria-hidden="true" id="map"/>
-        <div className="options-box">
-        <div className="markers-title">Search for nearby places</div>
-        <div><input
-            id="places-search"
-            type="text"
-            placeholder="Type name of fav coffee place"
-            /*below the value will be the state of what the user wrote*/
-            value={this.state.query}
-            /*on change the event listener invokes filterVenues, then calls setState*/
-            onChange={(e) => this.filterVenues(e.target.value)}
-            />
-            <input id="go-places" type="button" value="Go" /></div>
-        <ol>
-        {venueList}
-        </ol>
+        <main id="main">
+          <div className="navbar">COFFEE TIME: Search for cheapest coffee places arround Bucharest</div>
+          <div role="application" aria-hidden="true" id="map"/>
+          <div className="options-box">
+          <div className="markers-title">Search for nearby places</div>
+          <div>
+          <form onSubmit={this.handleSubmit}>
+          <input
+              id="places-search"
+              type="text"
+              placeholder="Type name of fav coffee place"
+              /*on change the event listener invokes filterVenues, then calls setState*/
+              onChange={(e) => this.filterVenues(e.target.value)}
+              /*below the value will be the state of what the user wrote*/
+              value={this.state.query}
+              />
+              <input className="submit-button" type="submit" value="Submit" />
+              <ol>
+              {venueList}
+              text
+              </ol>
+          {/*<div>
+            <input id="show-listings" type="button" value="Show all places"/>
+            <input id="hide-listings" type="button" value="Hide them all" />
+          </div>*/}
+          {/*second request to add the map, a div with the id of map*/}
+        </form>
         </div>
-        {/*<div>
-          <input id="show-listings" type="button" value="Show all places"/>
-          <input id="hide-listings" type="button" value="Hide them all" />
-        </div>*/}
-        {/*second request to add the map, a div with the id of map*/}
+        </div>
         </main>
     );
   }

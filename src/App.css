@@ -31,9 +31,9 @@ html, body {
 
 .options-box {
   background: #040620;
-  height: 94%;
+  height: 90%;
   padding: 0vh 10px 0px 10px;
-  margin-top: 8vh;
+  margin-top: 13vh;
   text-align: center;
   width: 150px;
   top: 0;
@@ -46,12 +46,12 @@ html, body {
 
 .options-box ol {
   background: #040620;
-  height: 94%;
+  height: 90%;
   padding: 0px 0px 0px 20px;
   margin-top: 8vh;
   text-align: center;
   width: 150px;
-  top: 14vh;
+  top: 19vh;
   left: 0;
   position: fixed;
   transition: 0.5s;
@@ -61,18 +61,20 @@ html, body {
   width: 80px;
   font-family:Montserrat;
   font-size: 10px;
-  height: 16px;
+  height: 15px;
+  border-radius: 0
 }
 
 .submit-button {
 width: 50px;
 font-family: Montserrat;
 font-size: 8px;
-height: 22px;
+height: 21.5px;
+padding-bottom: 1px;
 }
 
 .navbar {
-  height: 8vh;
+  height: 13vh;
   display: block;
   position: fixed;
   z-index: 1;
@@ -122,9 +124,9 @@ height: 22px;
 
   .options-box {
     background: #040620;
-    height: 92%;
+    height: 90%;
     padding: 0vh 10px 0px 10px;
-    margin-top: 8vh;
+    margin-top: 10vh;
     text-align: center;
     width: 342px;
     top: 0;
@@ -143,7 +145,7 @@ height: 22px;
   }
 
   .navbar {
-    height: 6vh;
+    height: 8vh;
     display: block;
     position: fixed;
     z-index: 1;
@@ -155,6 +157,11 @@ height: 22px;
     text-align: center;
     padding-top: 20px;
   }
+
+h3 {
+  text-align: center;
+  margin-top: 1vh;
+}
 
   .markers-title {
     width: 342px;

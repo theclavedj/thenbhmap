@@ -3,6 +3,8 @@ import "./App.css";
 import "whatwg-fetch";
 import { Venues } from './Venues';
 import GoogleMaps from "./GoogleMaps"
+import Nav from './Nav'
+//import SideBar from './SideBar'
 
 class App extends Component {
   //proper usage of constructor and super https://reactjs.org/docs/react-component.html
@@ -18,11 +20,11 @@ class App extends Component {
 
   }
 
-  //updateQuery = (query) => {
-  //  this.setState({
-  //    query: query
-  //  })
-  //}
+  updateQuery = (query) => {
+  this.setState({
+  query: query
+})
+}
 
 
   componentDidMount() {
@@ -450,7 +452,7 @@ filterVenues(query) {
 
     return (
         <main id="main">
-          <div className="navbar">COFFEE TIME: Search for cheapest coffee places arround Bucharest</div>
+          <Nav/>
           <GoogleMaps/>
           <div className="options-box">
           <div className="markers-title">Search for nearby places</div>
@@ -474,9 +476,9 @@ filterVenues(query) {
             <input id="hide-listings" type="button" value="Hide them all" />
           </div>*/}
           {/*second request to add the map, a div with the id of map*/}
-        </form>
-        </div>
-        </div>
+          </form>
+          </div>
+          </div>
         </main>
     );
   }

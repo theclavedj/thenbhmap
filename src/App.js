@@ -17,11 +17,11 @@ class App extends Component {
 
   }
 
-  updateQuery = (query) => {
-    this.setState({
-      query: query
-    })
-  }
+  //updateQuery = (query) => {
+  //  this.setState({
+  //    query: query
+  //  })
+  //}
 
 
   componentDidMount() {
@@ -33,7 +33,7 @@ class App extends Component {
   loadMap = () => {
     window.initMap = this.initMap;
     loadMapsAPI(
-      "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=INSERT-KEY-HERE&v=3&callback=initMap"
+      "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyD8jbgZnV1lh455L-twNQh45MFwRVIKleU&v=3&callback=initMap"
     );
     //console.log(window.initMap)
   };
@@ -432,15 +432,15 @@ filterVenues(query) {
   }
 
   render() {
-    const venueList = this.state.venues.map(venues =>
-    <Venues key={venues.venue.id} name={venues.venue.name} onClick={(event) => window.google.maps.event.trigger(venueList.maker, "click")}
+    const venueList = this.state.venues.map((venues, query) =>
+    <Venues key={venues.venue.id} name={venues.venue.name} onClick={(event) => window.google.maps.event.trigger(this.filteredVenues, "click")}
     />
     //code on return between ol {venueList}
   )
 //console.log(venueList.marker)
 //function venueLi(query) {
-  //const listItems = this.state.query
-  //console.log(this.state.query)
+//  const listItems = this.state.query
+//  console.log(this.state.query)
 //}
 //{this.state.filterByInput && this.state.filterByInput.lenght > 0 && this.state.filterByInput.map((venues) => (
 //  <ol key={venues.id}>

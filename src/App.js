@@ -33,7 +33,7 @@ class App extends Component {
   loadMap = () => {
     window.initMap = this.initMap;
     loadMapsAPI(
-      "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyD8jbgZnV1lh455L-twNQh45MFwRVIKleU&v=3&callback=initMap"
+      "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=YOURAPIKEY&v=3&callback=initMap"
     );
     //console.log(window.initMap)
   };
@@ -430,16 +430,20 @@ filterVenues(query) {
       marker.setVisible(false);
     })
     this.setState({ query });
-    return
+    return query
   }
 
   render() {
-    //if (!this.state.venues.length) return <p> se jodioooo </p>
     const venueList = this.state.venues.map((item, i) =>
     <Venues key={i} name={item.venue.name} onClick={(event) => window.google.maps.event.trigger(item.maker, "click")}
     />
-    //<li className="venues-list" key={item.venue.id}>{item.venue.name}</li>
   )
+//console.log(venueList)
+//function venueLi(query) {
+  //const listItems = this.state.query
+  //console.log(this.state.query)
+//}
+
     return (
       <main id="main">
         <div className="navbar">COFFEE TIME: Search for cheapest coffee places arround Bucharest</div>
@@ -456,7 +460,9 @@ filterVenues(query) {
             onChange={(e) => this.filterVenues(e.target.value)}
             />
             <input id="go-places" type="button" value="Go" /></div>
-        <ol>{venueList}</ol>
+        <ol>
+        {venueList}
+        </ol>
         </div>
         {/*<div>
           <input id="show-listings" type="button" value="Show all places"/>

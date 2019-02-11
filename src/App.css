@@ -33,12 +33,12 @@ html, body {
   margin-top: 8vh;
   text-align: center;
   width: 342px;
-  position: fixed;
   top: 0;
   left: 0;
+  position: fixed;
   overflow-x: hidden;
-  transition: 0.5s;
   z-index: 1;
+  transition: 0.5s;
 }
 
 #places-search {

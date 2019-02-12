@@ -19,11 +19,10 @@ class App extends Component {
   }
 
   updateQuery = (query) => {
-  this.setState({
-  query: query
+    this.setState({
+      query: query
 })
 }
-
 
   componentDidMount() {
     //when the componentDidMount starts the loadmap function should be loaded to get google maps and also should call getinfo function to load foursquare api

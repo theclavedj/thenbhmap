@@ -476,7 +476,6 @@ filterVenues(query) {
           <GoogleMaps/>
           <div className="options-box">
           <div className="markers-title">Search for nearby places</div>
-          <div>
           <form onSubmit={this.handleSubmit}>
           <input
               id="places-search"
@@ -488,7 +487,8 @@ filterVenues(query) {
               value={this.state.query}
               />
               <input className="submit-button" type="submit" value="Submit" />
-              {this.state.filteredVenues.map((venues, index) => (
+              <div className="dd">
+              {this.state.filteredVenues.map((venues) => (
               <li onClick={this.tick} key={venues.venue.id} className="venues-list">
               {venues.venue.name}
               </li>
@@ -499,8 +499,8 @@ filterVenues(query) {
             <input id="hide-listings" type="button" value="Hide them all" />
           </div>*/}
           {/*second request to add the map, a div with the id of map*/}
-          </form>
           </div>
+          </form>
           </div>
         </main>
     );

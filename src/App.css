@@ -16,7 +16,11 @@ html, body {
   width: 130px;
   display: table;
   max-height: 100%;
-  padding-left: 2px;
+  margin-left: 10px;
+}
+
+.dd {
+  margin-top: 10vh;
 }
 
 .venues-list:hover {
@@ -31,9 +35,9 @@ html, body {
 
 .options-box {
   background: #040620;
-  height: 90%;
+  height: 60%;
   padding: 0vh 10px 0px 10px;
-  margin-top: 13vh;
+  margin-top: 22vh;
   text-align: center;
   width: 150px;
   top: 0;

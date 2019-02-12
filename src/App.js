@@ -516,4 +516,5 @@ function loadMapsAPI(src) {
   script.defer = true;
   ref.parentNode.insertBefore(script, ref);
 }
+
 export default App;

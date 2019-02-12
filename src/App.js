@@ -30,7 +30,6 @@ class App extends Component {
     //console.log(this.getInfo);
   }
 
-
   loadMap = () => {
     window.initMap = this.initMap;
     loadMapsAPI(

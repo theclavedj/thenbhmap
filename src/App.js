@@ -14,10 +14,8 @@ class App extends Component {
     //state of component which will receive info from foursquare api
     this.state = {
       query: '', //empty string which will receive input from user and will show markers according to the search
-      venues: [] //empty array which will be filled once the function getinfo loads the information from foursquare api async request
+      filteredVenues: [] //empty array which will be filled once the function getinfo loads the information from foursquare api async request
     };
-    this.markers = [] //empty array of markers which will be filled later on
-
   }
 
   updateQuery = (query) => {
@@ -67,10 +65,11 @@ class App extends Component {
         //console.log(response.response.groups[0].items)
         //after setting this state we receive 30 venues in react console log
         setVenueState(
-          { venues: response.response.groups[0].items },
+          {  venues: response.response.groups[0].items },
           this.loadMap()
           //because it's an async request, the loadMap function should be executed AFTER we receive information from external source
         );
+        this.markers = [] //empty array of markers which will be filled later on
       })
       //console.log(response);
       .catch(error => {
@@ -431,15 +430,20 @@ filterVenues(query) {
       marker.setVisible(true) :
       marker.setVisible(false);
     })
+    //this.state.venues.forEach(venues => {
+      //return venues.venue.name.toLowerCase().includes(query.toLowerCase()) === true ?
+      //console.log(venues.venue.name) :
+      //console.log('false')
+    //})
     this.setState({ filteredVenues: filterByInput, query });
   }
 
   render() {
-    const venueList = this.state.venues.map((venues, query) =>
-    <Venues key={venues.venue.id} name={venues.venue.name} onClick={(event) => window.google.maps.event.trigger(this.filteredVenues, "click")}
-    />
+    //const venueList = this.state.venues.map((venues, query) =>
+    //<Venues key={venues.venue.id} name={venues.venue.name} onClick={(event) => window.google.maps.event.trigger(this.filteredVenues, "click")}
+    ///>
     //code on return between ol {venueList}
-  )
+  //)
 //console.log(venueList.marker)
 //function venueLi(query) {
 //  const listItems = this.state.query
@@ -468,9 +472,12 @@ filterVenues(query) {
               value={this.state.query}
               />
               <input className="submit-button" type="submit" value="Submit" />
-              <ol>
-              {venueList}
-              </ol>
+              {this.state.filteredVenues.map((venues, index) => (
+              <li key={venues.venue.id} className="venues-list">
+              {venues.venue.name}
+              </li>
+              ))
+              }
           {/*<div>
             <input id="show-listings" type="button" value="Show all places"/>
             <input id="hide-listings" type="button" value="Hide them all" />

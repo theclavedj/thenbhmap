@@ -33,7 +33,7 @@ class App extends Component {
   loadMap = () => {
     window.initMap = this.initMap;
     loadMapsAPI(
-      "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyD8jbgZnV1lh455L-twNQh45MFwRVIKleU&v=3&callback=initMap"
+      "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=ADDTHEKEY&v=3&callback=initMap"
     );
     //console.log(window.initMap)
   };
@@ -47,8 +47,8 @@ class App extends Component {
     const venuesAPI = "https://api.foursquare.com/v2/venues/explore?";
     //variable wich saves details of foursquare such as id and type of information we are requesting
     const params = {
-      client_id: "RI1LDPFFA2C2K0C0DP0TBBY2JTWA30F2O0DNMJTZRQGVXL3P", //foursquare client id
-      client_secret: "P2RAP3W3EO4MGJDOVUQEA0FG1YEWMG23LMR00A3WHZ55GNQL", // foursquare client secret
+      client_id: "ADDTHEID", //foursquare client id
+      client_secret: "ADDTHESECRET", // foursquare client secret
       query: "coffee", //type of information we are requesting to foursquare api
       near: "Bucarest", //near bucarest city
       radius: "50000", //radius of requested data on Bucharest

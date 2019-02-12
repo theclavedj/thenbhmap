@@ -124,7 +124,11 @@ padding-bottom: 1px;
   }
 
   #map {
-    height: 100vh;
+    height: 92vh;
+    margin-left: 350px;
+    border-top: 8vh;
+    padding-top: 8vh;
+
   }
 
   .options-box {

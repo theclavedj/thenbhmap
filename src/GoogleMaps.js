@@ -4,7 +4,7 @@ class GoogleMaps extends Component {
 
     render() {
     return (
-      <div role="application" aria-hidden="true" id="map"/>
+      <div tabIndex="-1" aria-hidden="true" aria-label="Map with available Coffee shops within Bucharest" id="map"/>
     );
   }
 }

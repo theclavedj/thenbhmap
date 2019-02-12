@@ -470,25 +470,26 @@ filterVenues(query) {
 //}
 
     return (
-        <main id="main">
+        <main id="main" tabIndex="-1">
           <Nav/>
           <GoogleMaps/>
-          <div className="options-box">
-          <div className="markers-title">Search for nearby places</div>
-          <form onSubmit={this.handleSubmit}>
+          <div className="options-box" tabIndex="-1">
+          <div className="markers-title" tabIndex="0" aria-label="Search area">Search for nearby places</div>
           <input
               id="places-search"
               type="text"
+              aria-label="Search for your favorite coffee by typing here"
+              tabIndex="0"
               placeholder="Type name of fav coffee place"
               /*on change the event listener invokes filterVenues, then calls setState*/
               onChange={(e) => this.filterVenues(e.target.value)}
               /*below the value will be the state of what the user wrote*/
               value={this.state.query}
               />
-              <input className="submit-button" type="submit" value="Submit" />
-              <div className="dd">
+              <input className="submit-button" type="submit" value="Submit" tabIndex="0" aria-label="Submit button to request a place"/>
+              <div className="dd" tabIndex="-1">
               {this.state.filteredVenues.map((venues) => (
-              <li onClick={this.tick} key={venues.venue.id} className="venues-list">
+              <li onClick={this.tick} key={venues.venue.id} className="venues-list" tabIndex="0" aria-label="Results for searched coffee specifications">
               {venues.venue.name}
               </li>
               ))
@@ -499,7 +500,6 @@ filterVenues(query) {
           </div>*/}
           {/*second request to add the map, a div with the id of map*/}
           </div>
-          </form>
           </div>
         </main>
     );

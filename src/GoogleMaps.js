@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class GoogleMaps extends Component {
 
-  render() {
+    render() {
     return (
       <div role="application" aria-hidden="true" id="map"/>
     );

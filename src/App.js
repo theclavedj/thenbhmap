@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import "whatwg-fetch";
-import { Venues } from './Venues';
+//import { Venues } from './Venues';
 import GoogleMaps from "./GoogleMaps"
 import Nav from './Nav'
 //import SideBar from './SideBar'
@@ -438,6 +438,22 @@ filterVenues(query) {
     this.setState({ filteredVenues: filterByInput, query });
   }
 
+//tick = () => {
+//  let activeIndex = this.state.activeIndex
+//  let id = this.state.filterVenues
+//  if (activeIndex === id) {
+//    alert(this.state.filterVenues)
+//  }else{
+//    activeIndex++
+//  }
+//  this.setState({ activeIndex })
+//}
+
+//https://stackoverflow.com/questions/28511207/react-js-onclick-event-handler
+//onItemClick(li, event) {
+//  alert(li.name)
+//}
+
   render() {
     //const venueList = this.state.venues.map((venues, query) =>
     //<Venues key={venues.venue.id} name={venues.venue.name} onClick={(event) => window.google.maps.event.trigger(this.filteredVenues, "click")}
@@ -473,7 +489,7 @@ filterVenues(query) {
               />
               <input className="submit-button" type="submit" value="Submit" />
               {this.state.filteredVenues.map((venues, index) => (
-              <li key={venues.venue.id} className="venues-list">
+              <li onClick={this.tick} key={venues.venue.id} className="venues-list">
               {venues.venue.name}
               </li>
               ))

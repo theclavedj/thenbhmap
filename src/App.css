@@ -10,7 +10,7 @@ html, body {
 
 .venues-list {
   border: 1px solid #302745;
-  color: #302745;
+  color: #abbdd1;
   text-align: center;
   font-size: 10px;
   width: 130px;
@@ -25,7 +25,7 @@ html, body {
 
 .venues-list:hover {
   color: #f1f1f1;
-  border: 1px solid #f1f1f1;
+  border: 1px solid #ffbf00;
   cursor: pointer;
 }
 
@@ -107,9 +107,9 @@ padding-bottom: 1px;
 
 
   .venues-list {
-    border: 1px solid #302745;
+    border: 2px solid #302745;
     width: auto;
-    color: #302745;
+    color: #abbdd1;
     text-align: center;
     width: 280px;
     display: table;
@@ -119,7 +119,7 @@ padding-bottom: 1px;
 
   .venues-list:hover {
     color: #f1f1f1;
-    border: 1px solid #f1f1f1;
+    border: 2px solid #ffbf00;
     cursor: pointer;
   }
 

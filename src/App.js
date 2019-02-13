@@ -14,7 +14,8 @@ class App extends Component {
     //state of component which will receive info from foursquare api
     this.state = {
       query: '', //empty string which will receive input from user and will show markers according to the search
-      filteredVenues: [] //empty array which will be filled once the function getinfo loads the information from foursquare api async request
+      filteredVenues: [], //empty array which will be filled once the function getinfo loads the information from foursquare api async request
+      markers: []
     };
   }
 
@@ -439,8 +440,11 @@ filterVenues(query) {
   }
 
   tick = (venue) => {
-    let currentPosition = this.markers.filter(m => m.id === venue.id)[0];
-    //console.log(currentPosition)
+    let currentPosition = this.markers.filter(marker => marker.id === venue.id)[0];
+    console.log(currentPosition)
+    //this.markers.setAnimation(window.google.maps.Animation.BOUNCE);
+    //setTimeout(() => { this.markers.setAnimation(null)}, 1000)
+    //this.map.setZoom(18);
   }
 
   render() {

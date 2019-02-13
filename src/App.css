@@ -125,10 +125,10 @@ padding-bottom: 1px;
   }
 
   #map {
-    height: 92vh;
-    margin-left: 350px;
+    height: 100vh;
+    width: 82vw;
     border-top: 8vh;
-    padding-top: 8vh;
+    margin-left: 18vw;
 
   }
 
@@ -138,7 +138,7 @@ padding-bottom: 1px;
     padding: 0vh 10px 0px 10px;
     margin-top: 10vh;
     text-align: center;
-    width: 342px;
+    width: 18vw;
     top: 0;
     left: 0;
     position: fixed;

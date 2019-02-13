@@ -416,6 +416,7 @@ class App extends Component {
         map.setZoom(15);
     })
   };
+
 //function which will show the markers that match text input from the searchbox area
 filterVenues(query) {
   //console.log(query)
@@ -437,25 +438,14 @@ filterVenues(query) {
     this.setState({ filteredVenues: filterByInput, query });
   }
 
-//tick = () => {
-//  let activeIndex = this.state.activeIndex
-//  let id = this.state.filterVenues
-//  if (activeIndex === id) {
-//    alert(this.state.filterVenues)
-//  }else{
-//    activeIndex++
-//  }
-//  this.setState({ activeIndex })
-//}
-
-//https://stackoverflow.com/questions/28511207/react-js-onclick-event-handler
-//onItemClick(li, event) {
-//  alert(li.name)
-//}
+  tick = (venue) => {
+    let currentPosition = this.markers.filter(m => m.id === venue.id)[0];
+    //console.log(currentPosition)
+  }
 
   render() {
     //const venueList = this.state.venues.map((venues, query) =>
-    //<Venues key={venues.venue.id} name={venues.venue.name} onClick={(event) => window.google.maps.event.trigger(this.filteredVenues, "click")}
+    //<Venues key={venues.venue.id} name={venues.venue.name} onClick={(event) =>
     ///>
     //code on return between ol {venueList}
   //)
@@ -489,9 +479,9 @@ filterVenues(query) {
               <input className="submit-button" type="submit" value="Submit" tabIndex="0" aria-label="Submit button to request a place"/>
               <div className="dd" tabIndex="-1">
               {this.state.filteredVenues.map((venues) => (
-              <li onClick={this.tick} key={venues.venue.id} className="venues-list" tabIndex="0" aria-label="Results for searched coffee specifications">
+              <ol onClick={this.tick} key={venues.venue.id} className="venues-list" tabIndex="0" aria-label="Results for searched coffee specifications">
               {venues.venue.name}
-              </li>
+              </ol>
               ))
               }
           {/*<div>

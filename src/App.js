@@ -380,7 +380,7 @@ class App extends Component {
       const contentString = `${aVenue.venue.name},
       ${aVenue.venue.location.address},`;
       //variable which saves marker's new icon
-      const image = "http://i64.tinypic.com/macq41.png"
+      const image = "https://i.ibb.co/3NTwxhp/coffee-icon.png"
       //variable which loads the markers in the page
       let marker = new window.google.maps.Marker({
         title: aVenue.venue.name,

@@ -20,3 +20,12 @@ self.__precacheManifest = [
     "url": "/index.html"
   }
 ];
+
+const response = await fetch('https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyD8jbgZnV1lh455L-twNQh45MFwRVIKleU&v=3&callback=initMap');
+
+if (cacheable.isResponseCacheable(response)) {
+  const cache = await caches.open('api-cache');
+  cache.put(response.url, response);
+} else {
+  alert("Huston we got problems! Map cannot be loaded right now")// Do something when the response can't be cached.
+}

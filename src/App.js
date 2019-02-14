@@ -8,14 +8,15 @@ import Nav from './Nav'
 
 class App extends Component {
   //proper usage of constructor and super https://reactjs.org/docs/react-component.html
-  constructor(props) {
+  constructor() {
 
-    super(props);
+    super();
     //state of component which will receive info from foursquare api
     this.state = {
       query: '', //empty string which will receive input from user and will show markers according to the search
       filteredVenues: [], //empty array which will be filled once the function getinfo loads the information from foursquare api async request
-      markers: []
+      markers: [],
+      venues: []
     };
   }
 
@@ -38,6 +39,7 @@ class App extends Component {
     );
     //console.log(window.initMap)
   };
+
   //https://developer.foursquare.com/docs/api
   //create venue app using react with foursquare api http://stevebrown.co/journal/creating-a-local-venue-app-using-reactredux-with-the-foursquare-api-part-i
   // react docs, ajax and apis https://reactjs.org/docs/faq-ajax.html
@@ -379,7 +381,7 @@ class App extends Component {
     this.state.venues.map(aVenue => {
       //variable which will load the infowindow in the page, will provide name of the place and address
       const contentString = `${aVenue.venue.name},
-      ${aVenue.venue.location.address},`;
+      ${aVenue.venue.location.address}. Data courtesy of Foursquare`;
       //variable which saves marker's new icon
       const image = "https://i.ibb.co/3NTwxhp/coffee-icon.png"
       //variable which loads the markers in the page
@@ -439,9 +441,9 @@ filterVenues(query) {
     this.setState({ filteredVenues: filterByInput, query });
   }
 
-  tick = (venue) => {
-    let currentPosition = this.markers.filter(marker => marker.id === venue.id)[0];
-    console.log(currentPosition)
+  tick = (filteredVenues) => {
+    let currentPosition = this.state.markers.filter(marker => marker.id === currentPosition.id)[0];
+    console.log(currentPosition) //undefined no matter what
     //this.markers.setAnimation(window.google.maps.Animation.BOUNCE);
     //setTimeout(() => { this.markers.setAnimation(null)}, 1000)
     //this.map.setZoom(18);
@@ -468,7 +470,7 @@ filterVenues(query) {
           <Nav/>
           <GoogleMaps/>
           <div className="options-box" tabIndex="-1">
-          <div className="markers-title" tabIndex="0" aria-label="Search area">Search for nearby places</div>
+          <div className="markers-title" tabIndex="-1" aria-label="Search area">Search for nearby places</div>
           <input
               id="places-search"
               type="text"

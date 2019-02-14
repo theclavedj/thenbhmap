@@ -27,7 +27,16 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root">
+      Our website is loading, please hang there, we are almost there :)
+    </div>
+    <script>
+      const isProduction = ('%NODE_ENV%' === 'production');
+
+      if (isProduction && 'serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+      }
+    </script>
     <!--
     Welcome to my Neighborhood project, which is te last project from FEND nanodregree
       To begin the development, run `npm start` or `yarn start`.

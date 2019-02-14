@@ -146,3 +146,40 @@ The service worker is only implemented during production build and was used Goog
 ### License
 
 This is my project for Udacity project and has a [MIT License](https://opensource.org/licenses/MIT).
+
+## Inspiration
+
+	* This project could be possible thanks to Udacity and Google, if you are interested, check: https://eu.udacity.com/course/front-end-web-developer-nanodegree--nd001
+
+  * Inserting scripts in React:
+
+https://stackoverflow.com/questions/34424845/adding-script-tag-to-react-jsx
+
+https://www.klaasnotfound.com/2016/11/06/making-google-maps-work-with-react/
+
+* React with Google Maps:
+https://scotch.io/tutorials/react-apps-with-the-google-maps-api-and-google-maps-react
+
+* Deploying for user page using react
+
+https://dev.to/javascripterika/deploy-a-react-app-as-a-github-user-page-with-yarn-3fka
+
+* Workbox for custom PWA
+
+https://medium.freecodecamp.org/how-to-build-a-custom-pwa-with-workbox-in-create-react-app-be580686cf73
+
+* Implementing Workbox on react:
+
+https://github.com/facebook/create-react-app/issues/5673
+
+* Working with service worker on react
+
+https://scotch.io/tutorials/how-to-make-your-existing-react-app-progressive-in-10-minutes
+
+* From website to PWA with Workbox, Google Developer India
+
+https://www.youtube.com/watch?v=POS9HWcvuCU
+
+* React async script loader
+
+https://www.npmjs.com/package/react-async-script-loader

@@ -151,12 +151,21 @@ This is my project for Udacity project and has a [MIT License](https://opensourc
 
 	* This project could be possible thanks to Udacity and Google, if you are interested, check: https://eu.udacity.com/course/front-end-web-developer-nanodegree--nd001
 
+<<<<<<< HEAD
 * Inserting scripts in React: https://stackoverflow.com/questions/34424845/adding-script-tag-to-react-jsx
 
 * Google Maps with React: https://www.klaasnotfound.com/2016/11/06/making-google-maps-work-with-react/
+=======
+  * Inserting scripts in React:https://stackoverflow.com/questions/34424845/adding-script-tag-to-react-jsx
+>>>>>>> production-build
 
 * React with Google Maps: https://scotch.io/tutorials/react-apps-with-the-google-maps-api-and-google-maps-react
 
+<<<<<<< HEAD
+=======
+* React with Google Maps: https://scotch.io/tutorials/react-apps-with-the-google-maps-api-and-google-maps-react
+
+>>>>>>> production-build
 * Deploying for user page using react: https://dev.to/javascripterika/deploy-a-react-app-as-a-github-user-page-with-yarn-3fka
 
 * Workbox for custom PWA: https://medium.freecodecamp.org/how-to-build-a-custom-pwa-with-workbox-in-create-react-app-be580686cf73

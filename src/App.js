@@ -366,11 +366,11 @@ class App extends Component {
       ] //don't forget this line has been collapsed to the quantity of code
     });
     //adding variable for the searchbox input field and autocomplete
-    const searchBox = new window.google.maps.places.Autocomplete(
-      document.getElementById("places-search")
-    );
+    //const searchBox = new window.google.maps.places.Autocomplete(
+      //document.getElementById("places-search")
+    //);
     // Bias the searchbox to within the bounds of the map.
-    searchBox.bindTo("bounds", map);
+    //searchBox.bindTo("bounds", map);
 
     //https://developers.google.com/maps/documentation/javascript/infowindows
     //removed below variable "infowindow" from array function (this.state.venues.map) to avoid multiple open infowindows simultaneosly

@@ -134,6 +134,11 @@ export function unregister() {
   }
 }
 
+navigator.serviceWorker.getRegistrations().then(function(registrations) {
+ for(let registration of registrations) {
+  registration.unregister()
+} })
+
 //workboxSW.router.registerRouter('https://fonts.googleapis.com/(.*)',
 //workboxSW.strategies.cacheFirst({
   //cacheName: 'googleapis',

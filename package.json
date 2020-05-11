@@ -1,13 +1,13 @@
 {
   "name": "mylastproject",
-  "version": "0.1.0",
+  "version": "1.13.0",
   "private": true,
   "dependencies": {
-    "gh-pages": "^2.0.1",
-    "react": "^16.7.0",
+    "gh-pages": "^2.2.0",
+    "react": "^16.13.1",
     "react-async-script-loader": "^0.3.0",
-    "react-dom": "^16.7.0",
-    "react-scripts": "2.1.3",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.1",
     "whatwg-fetch": "^3.0.0"
   },
   "scripts": {
@@ -30,7 +30,7 @@
   ],
   "homepage": "https://theclavedj.github.io/",
   "devDependencies": {
-    "workbox-build": "^3.6.3",
-    "workbox-webpack-plugin": "^3.6.3"
+    "workbox-build": "^5.1.3",
+    "workbox-webpack-plugin": "^5.1.3"
   }
 }

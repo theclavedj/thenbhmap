@@ -383,7 +383,7 @@ class App extends Component {
       const contentString = `${aVenue.venue.name},
       ${aVenue.venue.location.address}. Data courtesy of Foursquare`;
       //variable which saves marker's new icon
-      const image = "https://i.ibb.co/3NTwxhp/coffee-icon.png"
+      const image = "https://i.ibb.co/D5P9LL1/coffee-icon.png"
       //variable which loads the markers in the page
       let marker = new window.google.maps.Marker({
         title: aVenue.venue.name,
